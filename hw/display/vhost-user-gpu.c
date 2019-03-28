@@ -91,9 +91,9 @@ typedef struct VhostUserGpuMsg {
     } payload;
 } QEMU_PACKED VhostUserGpuMsg;
 
-static VhostUserGpuMsg m __attribute__ ((unused));
+static VhostUserGpuMsg gm __attribute__ ((unused));
 #define VHOST_USER_GPU_HDR_SIZE \
-    (sizeof(m.request) + sizeof(m.size) + sizeof(m.flags))
+    (sizeof(gm.request) + sizeof(gm.size) + sizeof(gm.flags))
 
 #define VHOST_USER_GPU_MSG_FLAG_REPLY 0x4
 
