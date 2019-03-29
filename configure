@@ -348,6 +348,7 @@ vhost_vsock="$default_feature"
 vhost_user="no"
 vhost_user_blk_server="auto"
 vhost_user_fs="$default_feature"
+virtio_vhost_user="$default_feature"
 kvm="auto"
 hax="auto"
 hvf="auto"
@@ -1486,6 +1487,10 @@ for opt do
   ;;
   --enable-vhost-vdpa) vhost_vdpa="yes"
   ;;
+  --disable-virtio-vhost-user) virtio_vhost_user="no"
+  ;;
+  --enable-virtio-vhost-user) virtio_vhost_user="yes"
+  ;;
   --disable-vhost-kernel) vhost_kernel="no"
   ;;
   --enable-vhost-kernel) vhost_kernel="yes"
@@ -1604,6 +1609,15 @@ sysconfdir="${sysconfdir:-$prefix/etc}"
 local_statedir="${local_statedir:-$prefix/var}"
 firmwarepath="${firmwarepath:-$datadir/qemu-firmware}"
 localedir="${localedir:-$datadir/locale}"
+
+# UNIX domain sockets are required
+if test "$virtio_vhost_user" = ""; then
+    if test "$mingw32" = "yes"; then
+        virtio_vhost_user="no"
+    else
+        virtio_vhost_user="yes"
+    fi
+fi
 
 case "$cpu" in
     ppc)
@@ -5782,6 +5796,9 @@ if test "$vhost_vdpa" = "yes" ; then
 fi
 if test "$vhost_user_fs" = "yes" ; then
   echo "CONFIG_VHOST_USER_FS=y" >> $config_host_mak
+fi
+if test "$virtio_vhost_user" = "yes" ; then
+  echo "CONFIG_VIRTIO_VHOST_USER=y" >> $config_host_mak
 fi
 if test "$iovec" = "yes" ; then
   echo "CONFIG_IOVEC=y" >> $config_host_mak
