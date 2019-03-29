@@ -262,6 +262,10 @@ typedef struct VirtIOVhostUserPCI VirtIOVhostUserPCI;
 struct VirtIOVhostUserPCI {
     VirtIOPCIProxy parent_obj;
     VirtIOVhostUser vdev;
+
+    VirtIOPCIRegion doorbells;
+    VirtIOPCIRegion notifications;
+    VirtIOPCIRegion shared_memory;
 };
 
 #endif
