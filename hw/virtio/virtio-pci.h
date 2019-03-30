@@ -19,10 +19,6 @@
 #include "hw/virtio/virtio-bus.h"
 #include "qom/object.h"
 
-#ifdef CONFIG_VIRTIO_VHOST_USER
-#include "hw/virtio/virtio-vhost-user.h" /* TODO remove this later */
-#endif
-
 /* virtio-pci-bus */
 
 typedef struct VirtioBusState VirtioPCIBusState;
@@ -255,20 +251,4 @@ void virtio_pci_types_register(const VirtioPCIDeviceTypeInfo *t);
  */
 unsigned virtio_pci_optimal_num_queues(unsigned fixed_queues);
 
-/* TODO Remove this later */
-#ifdef CONFIG_VIRTIO_VHOST_USER
-typedef struct VirtIOVhostUserPCI VirtIOVhostUserPCI;
-
-struct VirtIOVhostUserPCI {
-    VirtIOPCIProxy parent_obj;
-    VirtIOVhostUser vdev;
-
-    MemoryRegion additional_resources_bar;
-
-    VirtIOPCIRegion doorbells;
-    VirtIOPCIRegion notifications;
-    VirtIOPCIRegion shared_memory;
-};
-
-#endif
 #endif
