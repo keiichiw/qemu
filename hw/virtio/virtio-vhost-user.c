@@ -31,7 +31,7 @@
 
 /* Protocol features that have been implemented */
 #define SUPPORTED_VHOST_USER_FEATURES \
-    (VHOST_USER_PROTOCOL_F_MQ | VHOST_USER_PROTOCOL_F_REPLY_ACK)
+    (1 << VHOST_USER_PROTOCOL_F_MQ | 1 << VHOST_USER_PROTOCOL_F_REPLY_ACK | 1 << VHOST_USER_PROTOCOL_F_CONFIG)
 
 /* Connection state machine
  *
