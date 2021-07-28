@@ -676,6 +676,8 @@ static void virtio_vhost_user_parse_m2s(VirtIOVhostUser *s)
         break;
     case VHOST_USER_SET_VRING_ENABLE:
         break;
+    case VHOST_USER_GET_CONFIG:
+        break;
     default:
         trace_virtio_vhost_user_m2s_unknown_request(s, s->read_msg.hdr.request);
         conn_state_transition(s, CONN_EVENT_MASTER_EINVAL);
@@ -796,6 +798,8 @@ static void virtio_vhost_user_parse_s2m(VirtIOVhostUser *s)
     case VHOST_USER_GET_QUEUE_NUM:
         break;
     case VHOST_USER_SET_VRING_ENABLE:
+        break;
+    case VHOST_USER_GET_CONFIG:
         break;
     default:
         trace_virtio_vhost_user_s2m_unknown_request(s, s->write_msg.hdr.request);
